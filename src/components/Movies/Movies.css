@@ -1,0 +1,32 @@
+.movies {
+  display: flex;
+  flex-direction: column;
+}
+
+.movies__button {
+  padding: 0;
+  margin: 60px auto 159px;
+  width: 240px;
+  min-height: 36px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+  text-align: center;
+  color: #FFFFFF;
+  background: #2F2F2F;
+  border-radius: 6px;
+  border: none;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.movies__button:hover {
+  opacity: 0.6;
+}
+
+@media screen and (min-width: 409px) {
+  .movies__button {
+    margin-top: 80px;
+    width: 320px;
+  }
+}

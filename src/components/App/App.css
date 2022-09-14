@@ -1,0 +1,17 @@
+body {
+  background-color: #202020;
+}
+
+.page {
+  margin: 0 auto;
+  padding: 0;
+  /* min-width: 320px; */
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  color: white;
+  background-color: #202020;
+}

@@ -1,0 +1,151 @@
+.profile {
+  min-height: 310px;
+  background-color: #202020;
+  display: flex;
+  justify-content: flex-start;
+  position: absolute;
+  top: 74px;
+  left: 0;
+  width: 100%;
+  height: calc(100vh - 74px) ;
+  justify-content: center;
+  z-index: 1;
+}
+
+.profile__title {
+  margin: 0;
+  padding: 70px 0 65px 0;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+  text-align: center;
+}
+
+.profile__form {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile__wrapper {
+  min-width: 81.25vw;
+  padding: 16px 0;
+  font-style: normal;
+  font-size: 11px;
+  line-height: 13px;
+}
+
+.profile__wrapper:first-of-type {
+  border-bottom: 1px solid #424242;
+}
+
+.profile__span {
+  display:inline-block;
+  min-width: 128px;
+  font-weight: 500;
+}
+
+.profile__input {
+  margin: 0;
+  padding: 0;
+  font-weight: 400;
+  width: calc(100% - 128px);
+  outline: none;
+  border: none;
+  background-color: #202020;
+  text-align: end;
+  color:#FFFFFF;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.profile__input:hover {
+  opacity: 0.6;
+}
+
+.profile__button-wrapper {
+  width: 81.25vw;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  bottom: 5.13vh;
+}
+
+.profile__button {
+  padding: 0 0 16px 0;
+  margin: 0;
+  border: none;
+  background-color: #202020;
+  color:#FFFFFF;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.profile__button:hover {
+  opacity: 0.6;
+}
+
+.profile__link-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+
+.profile__link {
+  padding: 0;
+  margin: 0;
+  color: #EE3465;
+  text-align: center;
+  text-decoration: none;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.profile__link:hover {
+  opacity: 0.6;
+}
+
+@media screen and (min-width: 540px) {
+  .profile__form {
+    max-width: 53.25vw;
+  }
+
+  .profile__button-wrapper {
+    max-width: 53.25vw;
+    bottom: 26vh;
+    font-size: 13px;
+    line-height: 16px;
+  }
+
+  .profile__wrapper {
+    min-width: 53.25vw;
+  }
+
+  .profile__title {
+    margin: 0;
+    padding: 236px 0 84px 0;
+  }
+}
+
+@media screen and (min-width: 931px) {
+  .profile__form {
+    max-width: 32.03vw;
+  }
+
+  .profile__button-wrapper {
+    max-width: 32.03vw;
+    bottom: 10vh;
+    font-size: 13px;
+    line-height: 16px;
+  }
+
+  .profile__wrapper {
+    min-width: 32.03vw;
+  }
+
+  .profile__title {
+    margin: 0;
+    padding: 74px 0 110px 0;
+  }
+}
