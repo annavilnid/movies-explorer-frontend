@@ -4,7 +4,6 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList'
 import Button from '../Button/Button';
 
 function Movies({userData, moviesData, buttonPropsSave, buttonPropsSaved}) {
-  console.log(moviesData.length > 10);
 
   return (
     <div className="movies">

@@ -244,7 +244,7 @@ function App() {
     }
   ]
 
-  const arrayIdSavedMovies = moviesUserData.map((i)=> i. movieId)
+  const arrayIdSavedMovies = moviesUserData.map((i)=> i.movieId)
   const newData = (moviesData.map((i) =>
     arrayIdSavedMovies.includes(i.id) ? {...i, saved: true} : {...i, saved: false}
   ))
@@ -275,7 +275,6 @@ function App() {
 
   function handleEditNavigationClick() {
     setNavigationOpen(true)
-    console.log(isNavigationOpen);
   }
 
   function closeAllPopups() {
@@ -301,7 +300,7 @@ function App() {
         <Route exact path={'/profile'} element={<Profile/>}/>
         <Route exact path={'/signin'} element={<Login/>}/>
         <Route exact path={'/signup'} element={<Register/>}/>
-        <Route path={'/*'} element={<NotFoundPage/>}/>
+        <Route path={'*'} element={<NotFoundPage/>}/>
       </Routes>
       <Footer/>
       </div>
