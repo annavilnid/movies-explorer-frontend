@@ -70,7 +70,6 @@ function App() {
 		if (token) {
 			auth.checkToken(token)
 				.then((res) => {
-          console.log('токен прошел проверку')
 					setIsLoggedIn(true);
 					setCurrentUser(res.user);
 				})
