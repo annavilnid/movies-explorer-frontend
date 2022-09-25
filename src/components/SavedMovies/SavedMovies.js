@@ -1,13 +1,15 @@
 import MoviesCardList from '../MoviesCardList/MoviesCardList'
 import SearchForm from '../SearchForm/SearchForm';
 
-function SavedMovies({userData, moviesData, onSubmit, handleDeleteMovie, isMovieAdded, filterIsOn, setFilterIsOn, searchRequest}) {
+function SavedMovies({userData, moviesData, onSubmit, handleDeleteMovie, isMovieAdded, filterIsOn, setFilterIsOn, searchRequest, setSearchRequestSaved}) {
+
   return (
     <section className='saved-movies'>
       <SearchForm onSubmit={onSubmit}
       filterIsOn={filterIsOn}
       setFilterIsOn={setFilterIsOn}
       searchRequest={searchRequest}
+      setSearchRequestSaved={setSearchRequestSaved}
       />
 
       {(moviesData.length) ? <MoviesCardList

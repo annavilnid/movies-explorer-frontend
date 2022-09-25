@@ -38,9 +38,11 @@ function App() {
   const [errMessage, setErrMessage]=useState('')
 
   useEffect(() => {
+    const token = localStorage.getItem('jwt_movie');
     handleTokenCheck()
+    console.log(token)
     if (isLoggedIn) {
-      mainApi.getDataApi()
+      mainApi.getDataApi(token)
         .then(([movieData, userData]) => {
           const savedUserMovies = movieData.filter(movie => movie.owner === userData.user._id)
           setSavedMoviesArray(savedUserMovies)
@@ -50,7 +52,7 @@ function App() {
           setErrMessage('Не удалось загрузить данные пользователя')
         })
     }
-  }, [isLoggedIn, setErrMessage]);
+  }, [isLoggedIn]);
 
   const changeUserInfo = (name, email) => {
     mainApi.changeUserInfo(name, email)
@@ -68,6 +70,7 @@ function App() {
 		if (token) {
 			auth.checkToken(token)
 				.then((res) => {
+          console.log('токен прошел проверку')
 					setIsLoggedIn(true);
 					setCurrentUser(res.user);
 				})
@@ -96,6 +99,7 @@ function App() {
 		auth.register(name, email, password)
 			.then((res) => {
 				handleLogin(email, password);
+        // setIsLoggedIn(true);
 			})
 			.catch((err) => {
         console.log('Ошибка при регистрации', err);
@@ -107,6 +111,12 @@ function App() {
     setIsLoggedIn(false);
 		localStorage.clear();
 		setCurrentUser({});
+    searchRequestMain('')
+    searchRequestSaved('')
+    mainMoviesArray([])
+    savedMoviesArray([])
+    filteredSavedMoviesArray([])
+    errMessage('')
   }
 
   const addMovie = (movie) => {
@@ -221,11 +231,9 @@ function App() {
           filterIsOn = {filterIsOnSaved}
           setFilterIsOn = {setFilterIsOnSaved}
           searchRequest={searchRequestSaved}
-          //userData={userData}
-          //moviesData={savedMoviesArray}
+          setSearchRequestSaved={setSearchRequestSaved}
           onSubmit={handleSavedMoviesSearch}
           isMovieAdded={isMovieAdded}
-          //addDeleteHandler={addDeleteHandler}
           handleDeleteMovie={deleteMovie}
           />
           </ProtectedRoute>

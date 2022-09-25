@@ -2,7 +2,7 @@ import SearchToggle from '../SearchToggle/SearchToggle';
 import { useEffect } from 'react';
 import useFormWithValidation from '../../hooks/useFormWithValidation';
 
-function SearchForm({onSubmit, searchRequest, onChange, filterIsOn, setFilterIsOn}) {
+function SearchForm({onSubmit, searchRequest, onChange, filterIsOn, setFilterIsOn, setSearchRequestSaved}) {
 
   const {
     values,
@@ -14,13 +14,18 @@ function SearchForm({onSubmit, searchRequest, onChange, filterIsOn, setFilterIsO
   } = useFormWithValidation();
 
   useEffect(() => {
+    if (setSearchRequestSaved) {
+		  setSearchRequestSaved('')
+    }
+	}, [setSearchRequestSaved]);
+
+  useEffect(() => {
 		setValues({search: searchRequest});
 	  setIsValid(true);
 	}, [searchRequest, setValues, setIsValid]);
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log('обрабатываем форму профиля')
     onSubmit(values.search);
   }
 

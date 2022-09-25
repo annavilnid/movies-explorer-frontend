@@ -14,27 +14,31 @@ class MainApi {
     return Promise.reject(`Ошибка: ${res.status}`)
   }
 
-  getDataApi() {
-    return Promise.all([this.getMoviesApi(), this.getUserInfoApi()])
+  getDataApi(token) {
+    console.log(JWT);
+    console.log(token);
+    return Promise.all([this.getMoviesApi(token), this.getUserInfoApi(token)])
   }
 
-  getMoviesApi() {
+  getMoviesApi(token) {
+    console.log(token)
     return fetch(`${this._url}/movies`, {
       method: 'GET',
       headers: {
         ...this._headers,
-        'Authorization': `Bearer ${JWT}`
+        'Authorization': `Bearer ${token}`
       },
     })
       .then(this._checkResponseApi)
   }
 
-  getUserInfoApi() {
+  getUserInfoApi(token) {
+    console.log(token)
     return fetch(`${this._url}/users/me`, {
       method: 'GET',
       headers: {
         ...this._headers,
-        'Authorization': `Bearer ${JWT}`
+        'Authorization': `Bearer ${token}`
       },
     })
       .then(this._checkResponseApi)
@@ -57,6 +61,7 @@ class MainApi {
 	}
 
   saveMovie(movie) {
+    console.log(JWT)
     return fetch(`${this._url}/movies`, {
       method: 'POST',
       headers: {
@@ -71,7 +76,7 @@ class MainApi {
         year: movie.year,
         description: movie.description,
         image: `${BASE_URL}${movie.image.url}`,
-        trailerLink: 'http://yandex.ru/pic1.jpg', // изменить, временное решеение
+        trailerLink: movie.trailerLink,
         thumbnail: `${BASE_URL}${movie.image.url}`,
         nameRU: movie.nameRU,
         nameEN: movie.nameEN,
