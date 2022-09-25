@@ -1,12 +1,10 @@
 import Logo from "../logo/logo";
-import { useLocation } from "react-router-dom";
 import {useMediaQuery} from "react-responsive";
 import BurgerMenu from "../BurgerMenu/BurgerMenu";
 import { NavLink } from "react-router-dom";
 import Navigation from '../Navigation/Navigation';
 
-function Header({handleEditNavigationClic, isNavigationOpen, closeAllPopups}) {
-  const location = useLocation();
+function Header({handleEditNavigationClic, isLoggedIn, isNavigationOpen, closeAllPopups}) {
   const mobile = useMediaQuery({query: "(max-width: 930px)"});
 
   const getHeaderSignMarkup = () => (
@@ -17,12 +15,12 @@ function Header({handleEditNavigationClic, isNavigationOpen, closeAllPopups}) {
 	);
 
   return (
-    <header className={(location.pathname === '/') ? 'header' : 'header header_theme_dark'}>
+    <header className={isLoggedIn ? 'header header_theme_dark' : 'header'}>
       <div className="header__wrapper">
         <Logo/>
-        {(location.pathname !== '/') && <Navigation isNavigationOpen={isNavigationOpen} closeAllPopups={closeAllPopups}/>}
-        {mobile && location.pathname !== '/' ? <BurgerMenu handleEditNavigationClic={handleEditNavigationClic}/> : <></>}
-        {(location.pathname === '/') && getHeaderSignMarkup() }
+        {isLoggedIn && <Navigation isNavigationOpen={isNavigationOpen} closeAllPopups={closeAllPopups}/>}
+        {mobile && isLoggedIn ? <BurgerMenu handleEditNavigationClic={handleEditNavigationClic}/> : <></>}
+        {!isLoggedIn && getHeaderSignMarkup() }
       </div>
     </header>
   );

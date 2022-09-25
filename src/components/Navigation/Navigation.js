@@ -7,26 +7,6 @@ function Navigation({isNavigationOpen,closeAllPopups}) {
   const mobile = useMediaQuery({query: "(max-width: 930px)"});
   const location = useLocation();
 
-  // const navigationData = [
-  //   {
-  //     value: 'Главная',
-  //     to: "/",
-  //     className: 'navigation__menu',
-  //   },
-  //   {
-  //     value: 'Фильмы',
-  //     to: "/movies",
-  //     className: 'navigation__menu',
-  //   },
-  //   {
-  //     value: 'Сохраненные фильмы',
-  //     to: "/saved-movies",
-  //     className: 'navigation__menu',
-  //   },
-  // ]
-
-  // const getNavMarkup = navigationData.map((i, index) => <NavItem key={index} className={`navigation__item ${(location.pathname === i.to) && 'navigation__item_active'}`} onClick={closeAllPopups} to={i.to}>{i.value}</NavItem>)
-
   const profileLinkMarkup = <><p className='profile-link__label'>Аккаунт</p><img className='profile-linknk__image' src={profile} alt="иконка юзера"/></>
 
   return (

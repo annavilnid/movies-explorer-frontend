@@ -1,277 +1,177 @@
+import { useEffect, useState } from 'react';
 import './App.css';
-import {Routes, Route} from 'react-router-dom'
+import { Routes, Route, useNavigate } from 'react-router-dom'
 import Main from '../Main/Main'
 import Movies from '../Movies/Movies'
 import Header from '../Header/Header'
-import Navigation from '../Navigation/Navigation'
 import Footer from '../Footer/Footer'
 import SavedMovies from '../SavedMovies/SavedMovies'
 import Profile from '../Profile/Profile'
 import Login from '../Login/Login'
 import Register from '../Register/Register'
 import NotFoundPage from '../NotFoundPage/NotFoundPage'
-import {useState} from 'react'
-import firstMovie from '../../images/first-movie.jpg'
-import secondMovie from '../../images/second-movie.jpg'
-import thirdMovie from '../../images/third-movie.jpg'
+import auth from '../../utils/Auth';
+import moviesApi from '../../utils/MoviesApi';
+import mainApi from '../../utils/MainApi';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import { CurrentUserContext } from '../../context/CurrentUserContext'
 
 function App() {
-  const userData = {
-    id: "631876b123aeef3464e6f20f",
-    name: "66",
-    email: "test66@mail.ru"
-  }
-
-  const moviesData = [
-    {
-      id: 1,
-      country: "Россия",
-      director: "Зак Снайдер",
-      duration: '27 минут',
-      year: "2004",
-      description: "Фильм",
-      image: "http://yandex.ru/pic1.jpg",
-      trailerLink: firstMovie,
-      thumbnail: "http://yandex.ru/pic1.jpg",
-      nameRU: "В погоне за Бенкси",
-      nameEN: "Movie",
-      __v: 0
-    },
-    {
-      id: 2,
-      country: "Россия",
-      director: "Зак Снайдер",
-      duration: '27 минут',
-      year: "2004",
-      description: "Фильм",
-      image: "http://yandex.ru/pic1.jpg",
-      trailerLink: secondMovie,
-      thumbnail: "http://yandex.ru/pic1.jpg",
-      nameRU: "В погоне за Бенкси",
-      nameEN: "Movie",
-      __v: 0
-    },
-    {
-      id: 3,
-      country: "Россия",
-      director: "Зак Снайдер",
-      duration: '27 минут',
-      year: "2004",
-      description: "Фильм",
-      image: "http://yandex.ru/pic1.jpg",
-      trailerLink: thirdMovie,
-      thumbnail: "http://yandex.ru/pic1.jpg",
-      nameRU: "В погоне за Бенкси",
-      nameEN: "Movie",
-      __v: 0
-    },
-    {
-      id: 4,
-      country: "Россия",
-      director: "Зак Снайдер",
-      duration: '27 минут',
-      year: "2004",
-      description: "Фильм",
-      image: "http://yandex.ru/pic1.jpg",
-      trailerLink: firstMovie,
-      thumbnail: "http://yandex.ru/pic1.jpg",
-      nameRU: "В погоне за Бенкси",
-      nameEN: "Movie",
-      __v: 0
-    },
-    {
-      id: 5,
-      country: "Россия",
-      director: "Зак Снайдер",
-      duration: '27 минут',
-      year: "2004",
-      description: "Фильм",
-      image: "http://yandex.ru/pic1.jpg",
-      trailerLink: secondMovie,
-      thumbnail: "http://yandex.ru/pic1.jpg",
-      nameRU: "В погоне за Бенкси",
-      nameEN: "Movie",
-      __v: 0
-    },
-    {
-      id: 6,
-      country: "Россия",
-      director: "Зак Снайдер",
-      duration: '27 минут',
-      year: "2004",
-      description: "Фильм",
-      image: "http://yandex.ru/pic1.jpg",
-      trailerLink: thirdMovie,
-      thumbnail: "http://yandex.ru/pic1.jpg",
-      nameRU: "В погоне за Бенкси",
-      nameEN: "Movie",
-      __v: 0
-
-    },
-    {
-      id: 7,
-      country: "Россия",
-      director: "Зак Снайдер",
-      duration: '27 минут',
-      year: "2004",
-      description: "Фильм",
-      image: "http://yandex.ru/pic1.jpg",
-      trailerLink: firstMovie,
-      thumbnail: "http://yandex.ru/pic1.jpg",
-      nameRU: "В погоне за Бенкси",
-      nameEN: "Movie",
-      __v: 0
-    },
-    {
-      id: 8,
-      country: "Россия",
-      director: "Зак Снайдер",
-      duration: '27 минут',
-      year: "2004",
-      description: "Фильм",
-      image: "http://yandex.ru/pic1.jpg",
-      trailerLink: secondMovie,
-      thumbnail: "http://yandex.ru/pic1.jpg",
-      nameRU: "В погоне за Бенкси",
-      nameEN: "Movie",
-      __v: 0
-    },
-    {
-      id: 9,
-      country: "Россия",
-      director: "Зак Снайдер",
-      duration: '27 минут',
-      year: "2004",
-      description: "Фильм",
-      image: "http://yandex.ru/pic1.jpg",
-      trailerLink: thirdMovie,
-      thumbnail: "http://yandex.ru/pic1.jpg",
-      nameRU: "В погоне за Бенкси",
-      nameEN: "Movie",
-      __v: 0
-    },
-    {
-      id: 10,
-      country: "Россия",
-      director: "Зак Снайдер",
-      duration: '27 минут',
-      year: "2004",
-      description: "Фильм",
-      image: "http://yandex.ru/pic1.jpg",
-      trailerLink: firstMovie,
-      nameRU: "В погоне за Бенкси",
-      nameEN: "Movie",
-      __v: 0
-    },
-    {
-      id: 11,
-      country: "Россия",
-      director: "Зак Снайдер",
-      duration: '27 минут',
-      year: "2004",
-      description: "Фильм",
-      image: "http://yandex.ru/pic1.jpg",
-      trailerLink: secondMovie,
-      thumbnail: "http://yandex.ru/pic1.jpg",
-      nameRU: "В погоне за Бенкси",
-      nameEN: "Movie",
-      __v: 0
-    },
-    {
-      id: 12,
-      country: "Россия",
-      director: "Зак Снайдер",
-      duration: '27 минут',
-      year: "2004",
-      description: "Фильм",
-      image: "http://yandex.ru/pic1.jpg",
-      trailerLink: thirdMovie,
-      thumbnail: "http://yandex.ru/pic1.jpg",
-      nameRU: "В погоне за Бенкси",
-      nameEN: "Movie",
-      __v: 0
-    }
-  ]
-
-  const moviesUserData = [
-    {
-        id: "6318771b23aeef3464e6f212",
-        country: "Россия",
-        director: "Зак Снайдер",
-        duration: '27 минут',
-        year: "2004",
-        description: "Фильм",
-        image: "http://yandex.ru/pic1.jpg",
-        trailerLink: firstMovie,
-        thumbnail: "http://yandex.ru/pic1.jpg",
-        owner: "631876b123aeef3464e6f20f",
-        movieId: 1,
-        nameRU: "В погоне за Бенкси",
-        nameEN: "Movie",
-        __v: 0
-    },
-    {
-        id: "6318776223aeef3464e6f214",
-        country: "Россия",
-        director: "Зак Снайдер",
-        duration: '27 минут',
-        year: "2004",
-        description: "Фильм",
-        image: "http://yandex.ru/pic1.jpg",
-        trailerLink: secondMovie,
-        thumbnail: "http://yandex.ru/pic1.jpg",
-        owner: "631876b123aeef3464e6f20f",
-        movieId: 9,
-        nameRU: "В погоне за Бенкси",
-        nameEN: "Movie",
-        __v: 0
-    },
-    {
-        id: "6318777b23aeef3464e6f218",
-        country: "Россия",
-        director: "Зак Снайдер",
-        duration: '27 минут',
-        year: "2004",
-        description: "Фильм",
-        image: "http://yandex.ru/pic1.jpg",
-        trailerLink: thirdMovie,
-        thumbnail: "http://yandex.ru/pic1.jpg",
-        owner: "631876b123aeef3464e6f20f",
-        movieId: 11,
-        nameRU: "В погоне за Бенкси",
-        nameEN: "Movie",
-        __v: 0
-    }
-  ]
-
-  const arrayIdSavedMovies = moviesUserData.map((i)=> i.movieId)
-  const newData = (moviesData.map((i) =>
-    arrayIdSavedMovies.includes(i.id) ? {...i, saved: true} : {...i, saved: false}
-  ))
-
-  const handlerIsOwn = () => console.log('нажали на кнопку')
-
-  const buttonProps = {
-    saved: {
-      className: 'movie-card__saved',
-      onClic: handlerIsOwn,
-      label: 'Сохранено'
-    },
-    save: {
-        className: 'movie-card__save',
-        onClic: handlerIsOwn,
-        label: 'Сохранено'
-    },
-    delite: {
-        className: 'movie-card__delite',
-        onClic: handlerIsOwn,
-        label: 'Сохранено'
-    }
-  }
-
-
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [isNavigationOpen, setNavigationOpen] = useState(false);
+
+  const [currentUser, setCurrentUser] = useState({});
+
+  const [mainMoviesArray, setMainMoviesArray] = useState([]);
+  const [savedMoviesArray, setSavedMoviesArray] = useState([]);
+
+  const [filteredSavedMoviesArray, setFilteredSavedMoviesArray] = useState([]);
+
+  const [searchRequestMain, setSearchRequestMain] = useState('');
+  const [searchRequestSaved, setSearchRequestSaved] = useState('');
+
+  const [filterIsOnMain, setFilterIsOnMain] = useState(false)
+  const [filterIsOnSaved, setFilterIsOnSaved] = useState(false)
+
+  const [errMessage, setErrMessage]=useState('')
+
+  useEffect(() => {
+    handleTokenCheck()
+    if (isLoggedIn) {
+      mainApi.getDataApi()
+        .then(([movieData, userData]) => {
+          const savedUserMovies = movieData.filter(movie => movie.owner === userData.user._id)
+          setSavedMoviesArray(savedUserMovies)
+        })
+        .catch(err => {
+          console.log('Не удалось загрузить данные пользователя', err);
+          setErrMessage('Не удалось загрузить данные пользователя')
+        })
+    }
+  }, [isLoggedIn, setErrMessage]);
+
+  const changeUserInfo = (name, email) => {
+    mainApi.changeUserInfo(name, email)
+			.then((userData) => {
+				setCurrentUser(userData.user);
+			})
+			.catch((err) => {
+        console.log('Не удалось изменить данные пользователя', err);
+        setErrMessage('Не удалось изменить данные пользователя')
+			});
+  }
+
+  const handleTokenCheck = () => {
+		const token = localStorage.getItem('jwt_movie');
+		if (token) {
+			auth.checkToken(token)
+				.then((res) => {
+					setIsLoggedIn(true);
+					setCurrentUser(res.user);
+				})
+				.catch((err) => {
+					console.log('Токен не прошел проверку', err);
+          setErrMessage('Токен не прошел проверку')
+				});
+		}
+	};
+
+  const handleLogin = (email, password) => {
+		auth.authorize(email, password)
+			.then((res) => {
+				localStorage.setItem('jwt_movie', res.token);
+        setIsLoggedIn(true);
+		    navigate('/movies')
+				handleTokenCheck();
+			})
+			.catch((err) => {
+				console.log('Не удалось залогиниться', err);
+        setErrMessage('Не удалось залогиниться')
+			});
+	};
+
+  const handleRegistration = (name, email, password) => {
+		auth.register(name, email, password)
+			.then((res) => {
+				handleLogin(email, password);
+			})
+			.catch((err) => {
+        console.log('Ошибка при регистрации', err);
+        setErrMessage('Ошибка при регистрации')
+			});
+	};
+
+  const handleLogOut = () => {
+    setIsLoggedIn(false);
+		localStorage.clear();
+		setCurrentUser({});
+  }
+
+  const addMovie = (movie) => {
+    mainApi.saveMovie(movie)
+      .then((movieData) => {
+        setSavedMoviesArray([...savedMoviesArray, { ...movieData.movie}]);
+      })
+      .catch((err) => {
+        console.log('Не удалось сохранить фильм', err);
+        setErrMessage('Не удалось сохранить фильм')
+      });
+  };
+
+  const deleteMovie = (movie) => {
+    const movieForDelete = savedMoviesArray.find((i) => (i._id === movie._id) || (i.movieId === movie.id))
+    mainApi.deleteMovie(movieForDelete._id)
+      .then((movieData) => {
+          const newsavedMovies = savedMoviesArray.filter(movie => movie._id !== movieData.data._id)
+          setSavedMoviesArray(newsavedMovies);
+      })
+      .catch((err) => {
+        console.log('Не удалось удалить фильм', err);
+        setErrMessage('Не удалось удалить фильм')
+      });
+  };
+
+  const isMovieAdded = (movie) => savedMoviesArray.some((i) => (i.movieId === movie.movieId) || (i.movieId === movie.id))
+
+  const addDeleteHandler = (movie, isAdded) => (isAdded ? addMovie(movie) : deleteMovie(movie));
+
+  const filterBySymbols = (movie, symbols) => movie.nameRU.toLowerCase()
+		.includes(symbols.toLowerCase());
+
+  const handleMoviesSearch = (search) => {
+		setIsLoading(true);
+		setMainMoviesArray([]);
+		moviesApi.getMoviesApi()
+			.then((res) => {
+				const filtered = res.filter((movie) => filterBySymbols(movie, search));
+				setMainMoviesArray(filtered);
+				localStorage.setItem('foundedMovies', JSON.stringify(filtered));
+				localStorage.setItem('searchRequest', search);
+				setSearchRequestMain(search);
+				setIsLoading(false);
+			})
+			.catch((err) => {
+        setIsLoading(false);
+				console.log('Не удалось загрузить фильмы', err);
+        setErrMessage('Не удалось загрузить фильмы')
+			});
+	};
+
+  const handleSavedMoviesSearch = (search) => {
+    const filtered = savedMoviesArray.filter((movie) => filterBySymbols(movie, search));
+		setFilteredSavedMoviesArray(filtered);
+		setSearchRequestSaved(search);
+	};
+
+  const filterHandler = (movies, filtred) => {
+    if (filtred) {
+      return movies.filter(movie => movie.duration < 40);
+    } else {
+      return movies
+    }
+  }
 
   function handleEditNavigationClick() {
     setNavigationOpen(true)
@@ -279,30 +179,77 @@ function App() {
 
   function closeAllPopups() {
     setNavigationOpen(false)
-    }
+  }
 
   return (
       <div className='page'>
+        <CurrentUserContext.Provider value={currentUser}>
       <Header
       handleEditNavigationClic={handleEditNavigationClick}
       isLoggedIn={isLoggedIn}
       isNavigationOpen={isNavigationOpen}
       closeAllPopups={closeAllPopups}
       />
-      {/* <Navigation
-      isNavigationOpen={isNavigationOpen}
-      closeAllPopups={closeAllPopups}
-      /> */}
       <Routes>
         <Route exact path={'/'} element={<Main/>}/>
-        <Route exact path={'/movies'} element={<Movies userData={userData} moviesData={newData} buttonPropsSave={buttonProps.save} buttonPropsSaveed={buttonProps.saveed}/>}/>
-        <Route exact path={'/saved-movies'} element={<SavedMovies userData={userData} moviesData={moviesUserData} buttonPropsSave={buttonProps.dalite}/>}/>
-        <Route exact path={'/profile'} element={<Profile/>}/>
-        <Route exact path={'/signin'} element={<Login/>}/>
-        <Route exact path={'/signup'} element={<Register/>}/>
+
+        <Route
+        exact path="/movies"
+        element={
+          <ProtectedRoute isLoggedIn={isLoggedIn}>
+          <Movies
+          moviesData = {filterHandler(mainMoviesArray, filterIsOnMain)}
+          filterIsOn = {filterIsOnMain}
+          setFilterIsOn = {setFilterIsOnMain}
+          onSubmit={handleMoviesSearch}
+          searchRequest={searchRequestMain}
+          addDeleteHandler={addDeleteHandler}
+          isMovieAdded={isMovieAdded}
+          isLoading={isLoading}
+          errMessage={errMessage}
+          />
+          </ProtectedRoute>
+        }
+        />
+
+        <Route
+        exact path="/saved-movies"
+        element={
+          <ProtectedRoute isLoggedIn={isLoggedIn}>
+          <SavedMovies
+          moviesData = {filterHandler(searchRequestSaved ? filteredSavedMoviesArray : savedMoviesArray, filterIsOnSaved)}
+          filterIsOn = {filterIsOnSaved}
+          setFilterIsOn = {setFilterIsOnSaved}
+          searchRequest={searchRequestSaved}
+          //userData={userData}
+          //moviesData={savedMoviesArray}
+          onSubmit={handleSavedMoviesSearch}
+          isMovieAdded={isMovieAdded}
+          //addDeleteHandler={addDeleteHandler}
+          handleDeleteMovie={deleteMovie}
+          />
+          </ProtectedRoute>
+        }
+        />
+
+        <Route
+        exact path="/profile"
+        element={
+          <ProtectedRoute isLoggedIn={isLoggedIn}>
+          <Profile
+          onClick={handleLogOut}
+          changeUserInfo={changeUserInfo}
+          />
+          </ProtectedRoute>
+        }
+        />
+
+        <Route exact path={'/signup'} element={<Register onSubmit={handleRegistration}/>}/>
+        <Route exact path={'/signin'} element={<Login onSubmit={handleLogin}/>}/>
         <Route path={'*'} element={<NotFoundPage/>}/>
       </Routes>
       <Footer/>
+      </CurrentUserContext.Provider>
       </div>
   );
 }

@@ -80,6 +80,10 @@
   opacity: 0.6;
 }
 
+.login__button:disabled {
+  opacity: 0.2;
+}
+
 .login__link {
   margin: 0;
   padding: 0;

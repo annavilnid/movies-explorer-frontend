@@ -1,7 +1,6 @@
 import MoviesCard from '../MoviesCard/MoviesCard'
-import Button from '../Button/Button';
 
-function MoviesCardList({userData, moviesData}) {
+function MoviesCardList({userData, moviesData, addDeleteHandler, isMovieAdded, handleDeleteMovie}) {
 
   return (
     <>
@@ -10,6 +9,9 @@ function MoviesCardList({userData, moviesData}) {
         <MoviesCard key={index}
         userData={userData}
         movieData={i}
+        addDeleteHandler={addDeleteHandler}
+        isMovieAdded={isMovieAdded}
+        handleDeleteMovie={handleDeleteMovie}
         />
         ))}
       </ul>

@@ -80,6 +80,10 @@
   opacity: 0.6;
 }
 
+.register__button:disabled {
+  opacity: 0.2;
+}
+
 .register__link {
   margin: 0;
   padding: 0;
