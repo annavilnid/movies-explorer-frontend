@@ -54,7 +54,8 @@ function App() {
   }, [isLoggedIn]);
 
   const changeUserInfo = (name, email) => {
-    mainApi.changeUserInfo(name, email)
+    const token = localStorage.getItem('jwt_movie');
+    mainApi.changeUserInfo(token, name, email)
 			.then((userData) => {
 				setCurrentUser(userData.user);
 			})
@@ -119,7 +120,8 @@ function App() {
   }
 
   const addMovie = (movie) => {
-    mainApi.saveMovie(movie)
+    const token = localStorage.getItem('jwt_movie');
+    mainApi.saveMovie(token, movie)
       .then((movieData) => {
         setSavedMoviesArray([...savedMoviesArray, { ...movieData.movie}]);
       })
@@ -130,8 +132,9 @@ function App() {
   };
 
   const deleteMovie = (movie) => {
+    const token = localStorage.getItem('jwt_movie');
     const movieForDelete = savedMoviesArray.find((i) => (i._id === movie._id) || (i.movieId === movie.id))
-    mainApi.deleteMovie(movieForDelete._id)
+    mainApi.deleteMovie(token, movieForDelete._id)
       .then((movieData) => {
           const newsavedMovies = savedMoviesArray.filter(movie => movie._id !== movieData.data._id)
           setSavedMoviesArray(newsavedMovies);

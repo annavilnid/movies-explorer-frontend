@@ -1,5 +1,4 @@
 import { MAINAPI_URL, BASE_URL } from './constants'
-const JWT = localStorage.getItem('jwt_movie');
 
 class MainApi {
   constructor(config) {
@@ -15,13 +14,10 @@ class MainApi {
   }
 
   getDataApi(token) {
-    console.log(JWT);
-    console.log(token);
     return Promise.all([this.getMoviesApi(token), this.getUserInfoApi(token)])
   }
 
   getMoviesApi(token) {
-    console.log(token)
     return fetch(`${this._url}/movies`, {
       method: 'GET',
       headers: {
@@ -33,7 +29,6 @@ class MainApi {
   }
 
   getUserInfoApi(token) {
-    console.log(token)
     return fetch(`${this._url}/users/me`, {
       method: 'GET',
       headers: {
@@ -44,13 +39,12 @@ class MainApi {
       .then(this._checkResponseApi)
   }
 
-  changeUserInfo(name, email) {
-    console.log(JWT);
+  changeUserInfo(token, name, email) {
 		return fetch(`${this._url}/users/me`, {
 			method: 'PATCH',
 			headers: {
         ...this._headers,
-        'Authorization': `Bearer ${JWT}`
+        'Authorization': `Bearer ${token}`
       },
 			body: JSON.stringify({
 				name,
@@ -60,13 +54,14 @@ class MainApi {
     .then(this._checkResponseApi)
 	}
 
-  saveMovie(movie) {
-    console.log(JWT)
+  saveMovie(token, movie) {
+    console.log(token)
+    console.log(movie)
     return fetch(`${this._url}/movies`, {
       method: 'POST',
       headers: {
         ...this._headers,
-        'Authorization': `Bearer ${JWT}`
+        'Authorization': `Bearer ${token}`
       },
       body: JSON.stringify({
         movieId: movie.id,
@@ -85,12 +80,12 @@ class MainApi {
       .then(this._checkResponseApi)
   }
 
-  deleteMovie(id) {
+  deleteMovie(token, id) {
 		return fetch(`${this._url}/movies/${id}`, {
 			method: 'DELETE',
 			headers: {
         ...this._headers,
-        'Authorization': `Bearer ${JWT}`
+        'Authorization': `Bearer ${token}`
       },
     })
       .then(this._checkResponseApi)
