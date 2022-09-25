@@ -27,9 +27,7 @@ function Movies({onSubmit, moviesData, searchRequest, addDeleteHandler, isMovieA
   }
 
   function getExteraRow(windowSize) {
-    if (windowSize <= MOBILE_WIDTH) {
-      return(2)
-    } if (windowSize > MOBILE_WIDTH && windowSize <= TABLET_WIDTH) {
+    if (windowSize <= TABLET_WIDTH) {
       return(2)
     } else {
       return(3)

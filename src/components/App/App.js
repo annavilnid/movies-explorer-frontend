@@ -40,7 +40,6 @@ function App() {
   useEffect(() => {
     const token = localStorage.getItem('jwt_movie');
     handleTokenCheck()
-    console.log(token)
     if (isLoggedIn) {
       mainApi.getDataApi(token)
         .then(([movieData, userData]) => {
