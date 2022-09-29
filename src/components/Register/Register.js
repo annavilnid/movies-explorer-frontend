@@ -3,7 +3,7 @@ import Form from "../Form/Form"
 import { useEffect } from "react";
 import useFormWithValidation from '../../hooks/useFormWithValidation';
 
-function Register({onSubmit}) {
+function Register({onSubmit, isLoading, setIsLoading}) {
   const {
     values,
     setValues,
@@ -20,7 +20,10 @@ function Register({onSubmit}) {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    onSubmit(values.name, values.email, values.password);
+    setIsLoading(true)
+    if (!isLoading) {
+      onSubmit(values.name, values.email, values.password);
+    }
   };
 
   return (
@@ -40,7 +43,7 @@ function Register({onSubmit}) {
       spanClassName='register__text'
       spanText="Уже зарегестрированы?"
       wrapperClassName='register__link-wrapper'
-      disabled={(!values.name || !values.email || !values.password || !isValid)}
+      disabled={(!values.name || !values.email || !values.password || !isValid || validateEmail() || isLoading)}
       >
       <div className="register__wrapper">
         <span className="register__span">
@@ -57,6 +60,7 @@ function Register({onSubmit}) {
 				placeholder="Имя"
         value={values.name || ''}
         onChange={handleChange}
+        disabled={isLoading}
 				/>
       </div>
       <span className="register__error">{errors.name}</span>
@@ -72,6 +76,7 @@ function Register({onSubmit}) {
 				placeholder="E-mail"
         value={values.email || ''}
         onChange={handleChange}
+        disabled={isLoading}
 				/>
       </div>
       <span className="register__error">{validateEmail()}</span>
@@ -90,9 +95,10 @@ function Register({onSubmit}) {
 				placeholder="Пароль"
         value={values.password || ''}
         onChange={handleChange}
+        disabled={isLoading}
 			  />
       </div>
-      <span className="register__error">{errors.password}</span>
+      <span className="register__error">{errors.password || ''}</span>
     </Form>
     </div>
   );

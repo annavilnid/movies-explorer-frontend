@@ -5,7 +5,6 @@ body {
 .page {
   margin: 0 auto;
   padding: 0;
-  /* min-width: 320px; */
   font-family: 'Inter', Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

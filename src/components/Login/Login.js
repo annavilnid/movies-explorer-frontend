@@ -3,7 +3,7 @@ import Logo from "../logo/logo";
 import Form from '../Form/Form';
 import useFormWithValidation from '../../hooks/useFormWithValidation';
 
-function Login({onSubmit}) {
+function Login({onSubmit, isLoading, setIsLoading}) {
   const {
     values,
     setValues,
@@ -19,8 +19,11 @@ function Login({onSubmit}) {
 	}, [ setValues, setIsValid]);
 
   const submitHandler = (e) => {
+    setIsLoading(true)
     e.preventDefault();
-    onSubmit(values.email, values.password);
+    if (!isLoading) {
+      onSubmit(values.email, values.password);
+    }
   };
 
   return (
@@ -40,7 +43,7 @@ function Login({onSubmit}) {
       spanClassName='login__text'
       spanText="Еще не зарегестрированы?"
       wrapperClassName='login__link-wrapper'
-      disabled={(!values.email || !values.password || !isValid)}
+      disabled={(!values.email || !values.password || !isValid || validateEmail() || isLoading)}
       >
       <div className="login__wrapper">
         <span className="login__span">
@@ -54,6 +57,7 @@ function Login({onSubmit}) {
 				placeholder="E-mail"
         value={values.email || ''}
         onChange={handleChange}
+        disabled={isLoading}
 				/>
         </div>
       <span className="login__error">{validateEmail()}</span>
@@ -72,6 +76,7 @@ function Login({onSubmit}) {
         placeholder="Пароль"
         value={values.password || ''}
         onChange={handleChange}
+        disabled={isLoading}
 				/>
       </div>
       <span className="login__error">{errors.password}</span>

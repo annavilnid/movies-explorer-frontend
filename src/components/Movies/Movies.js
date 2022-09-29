@@ -3,14 +3,15 @@ import Preloader from '../Preloader/Preloader'
 import MoviesCardList from '../MoviesCardList/MoviesCardList'
 import Button from '../Button/Button';
 import { useState, useEffect } from 'react';
-import { DESKTOP_WIDTH, TABLET_WIDTH, MOBILE_WIDTH } from '../../utils/constants';
+import { DESKTOP_WIDTH, TABLET_WIDTH, MOBILE_WIDTH, COUNT_MOBILE, COUNT_TABLET,
+COUNT_DESKTOP, EXTRA_MOBILE_TABLET, EXTRA_DESKTOP} from '../../utils/constants';
 
-function Movies({onSubmit, moviesData, searchRequest, addDeleteHandler, isMovieAdded, filterIsOn, setFilterIsOn, isLoading, errMessage}) {
+function Movies({onSubmit, moviesData, searchRequest, addDeleteHandler, isMovieAdded, filterIsOn, setFilterIsOn, isLoading, setIsLoading, notFoundMain}) {
   const [currentCount, setCurrentCount] = useState(0);
   const [extraRow, setExtraRow] = useState(0);
   const [moviesToRender, setMoviesToRender] = useState([]);
   const [screenSize, setScreenSize] = useState(getScreenWidth())
-  const [firstMovies, setFirstMovies] = useState(5)
+  const [firstMovies, setFirstMovies] = useState(COUNT_MOBILE)
 
   function getScreenWidth() {
     return window.innerWidth;
@@ -18,19 +19,19 @@ function Movies({onSubmit, moviesData, searchRequest, addDeleteHandler, isMovieA
 
   function getFirstMovies(windowSize) {
     if (windowSize <= MOBILE_WIDTH) {
-      return(5)
+      return(COUNT_MOBILE)
     } if (windowSize > MOBILE_WIDTH && windowSize <= TABLET_WIDTH) {
-      return(8)
+      return(COUNT_TABLET)
     } else {
-      return(12)
+      return(COUNT_DESKTOP)
     };
   }
 
   function getExteraRow(windowSize) {
     if (windowSize <= TABLET_WIDTH) {
-      return(2)
+      return(EXTRA_MOBILE_TABLET)
     } else {
-      return(3)
+      return(EXTRA_DESKTOP)
     };
   }
 
@@ -53,18 +54,18 @@ function Movies({onSubmit, moviesData, searchRequest, addDeleteHandler, isMovieA
 		};
 		window.addEventListener('resize', resizeHandler);
 
-    if (firstMovies < getFirstMovies(screenSize) && currentCount<12) {
+    if (firstMovies < getFirstMovies(screenSize) && currentCount<COUNT_DESKTOP) {
       const count=getFirstMovies(screenSize);
       setFirstMovies(getFirstMovies(screenSize))
       setMoviesToRender(moviesData.slice(0, count));
       setCurrentCount(count);
-    } else if (screenSize > MOBILE_WIDTH && screenSize <= TABLET_WIDTH && currentCount%2 !== 0) {
+    } else if (screenSize > MOBILE_WIDTH && screenSize <= TABLET_WIDTH && currentCount%EXTRA_MOBILE_TABLET !== 0) {
       const count = currentCount + 1;
       const extraMovies = moviesData.slice(currentCount, count);
       setMoviesToRender([...moviesToRender, ...extraMovies]);
       setCurrentCount(count);
-    } else if (screenSize > TABLET_WIDTH && currentCount%3 !== 0) {
-      const count = currentCount + 2;
+    } else if (screenSize > TABLET_WIDTH && currentCount%EXTRA_DESKTOP !== 0) {
+      const count = currentCount + EXTRA_MOBILE_TABLET;
       const extraMovies = moviesData.slice(currentCount, count);
       setMoviesToRender([...moviesToRender, ...extraMovies]);
       setCurrentCount(count);
@@ -88,16 +89,16 @@ function Movies({onSubmit, moviesData, searchRequest, addDeleteHandler, isMovieA
       searchRequest={searchRequest}
       setFilterIsOn={setFilterIsOn}
       filterIsOn={filterIsOn}
+      isLoading={isLoading}
+      setIsLoading={setIsLoading}
       />
 
       {isLoading ?  <Preloader/> :
-      (moviesToRender.length) ? <MoviesCardList
+      moviesToRender.length ? <MoviesCardList
       moviesData={moviesToRender}
       addDeleteHandler={addDeleteHandler}
-      isMovieAdded ={isMovieAdded} /> :
-      (searchRequest.length !== 0) ? <span className='movie__result'>Ничего не найдено</span>:
-      (errMessage === 'Не удалось загрузить фильмы') ? <span className='movie__result'>Во время запроса произошла ошибка.
-      Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз</span> : <></>}
+      isMovieAdded ={isMovieAdded}/> :
+      notFoundMain ? <span className='movie__result'>Ничего не найдено</span> : <></>}
 
       {moviesToRender.length < moviesData.length && <Button className={'movies__button'} label={'Eщё'} type={'button'} onClick={buttonMoviesHandler}/>}
     </div>

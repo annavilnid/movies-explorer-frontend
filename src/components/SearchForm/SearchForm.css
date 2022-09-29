@@ -64,7 +64,7 @@
 .search__error {
   width: 100%;
   display: inline-block;
-  margin:0 auto 31px;
+  margin:0 auto;
   padding: 0;
   text-align:center;
   text-align: center;
@@ -84,10 +84,6 @@
 
   .search__wrapper {
     min-height: 70px;
-  }
-
-  .search__error {
-    margin-bottom: 27px;
   }
 
   .search__form-input {
@@ -112,10 +108,6 @@
 
   .search__wrapper {
     min-height: 70px;
-  }
-
-  .search__error {
-    margin-bottom: 27px;
   }
 
   .search__form-input {

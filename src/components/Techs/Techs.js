@@ -1,5 +1,6 @@
 import Title from "../Title/Title";
 import { useMediaQuery } from 'react-responsive';
+import { v4 as uuidv4 } from 'uuid';
 
 function Techs({id}) {
   const mobile = useMediaQuery({query: "(max-width: 747px)"});
@@ -36,8 +37,8 @@ function Techs({id}) {
 			title: 'mongoDB',
 		},
 	];
-  const techDataList = techData.map((i, index) => (
-			<li className="techs__item" key={index}>{i.title}</li>
+  const techDataList = techData.map((i) => (
+			<li className="techs__item" key={uuidv4()}>{i.title}</li>
 	));
   return (
     <section className='techs' id={id}>

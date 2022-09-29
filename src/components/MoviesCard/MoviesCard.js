@@ -31,9 +31,9 @@ function MoviesCard({movieData, addDeleteHandler, isMovieAdded, handleDeleteMovi
 
   const makeButtonMarkup = () => {
     if (Object.keys(movieData).includes('owner')) {
-      return <Button className={'movie-card__button'} onClick={deleteHandler} label={'x'} />
+      return <Button className={'movie-card__button'} onClick={deleteHandler} ariaLabel="удалить" label={'x'} />
     } else if (add) {
-      return <Button className={'movie-card__saved'} onClick={handleBookmarkClick} label={val} />
+      return <Button className={'movie-card__saved'} onClick={handleBookmarkClick} ariaLabel="удалить" label={val} />
     } else {
       return <Button className={'movie-card__button'} onClick={handleBookmarkClick} label={'Сохранить'} />
     }

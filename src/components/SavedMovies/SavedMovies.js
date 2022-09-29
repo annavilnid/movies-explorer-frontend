@@ -1,7 +1,7 @@
 import MoviesCardList from '../MoviesCardList/MoviesCardList'
 import SearchForm from '../SearchForm/SearchForm';
 
-function SavedMovies({userData, moviesData, onSubmit, handleDeleteMovie, isMovieAdded, filterIsOn, setFilterIsOn, searchRequest, setSearchRequestSaved}) {
+function SavedMovies({userData, moviesData, onSubmit, handleDeleteMovie, isMovieAdded, filterIsOn, setFilterIsOn, searchRequest, setSearchRequestSaved, notFoundSaved, isLoading, setIsLoading}) {
 
   return (
     <section className='saved-movies'>
@@ -10,16 +10,19 @@ function SavedMovies({userData, moviesData, onSubmit, handleDeleteMovie, isMovie
       setFilterIsOn={setFilterIsOn}
       searchRequest={searchRequest}
       setSearchRequestSaved={setSearchRequestSaved}
+      isLoading={isLoading}
+      setIsLoading={setIsLoading}
       />
 
-      {(moviesData.length) ? <MoviesCardList
+      {moviesData.length ? <MoviesCardList
       userData={userData}
       moviesData={moviesData}
       handleDeleteMovie={handleDeleteMovie}
       isMovieAdded={isMovieAdded}
       filterIsOn={filterIsOn}
       setFilterIsOn={setFilterIsOn}
-      />:<span className='movie__result'>Ничего не найдено</span>}
+      />:
+      notFoundSaved? <span className='movie__result'>Ничего не найдено</span> : <></>}
 
     </section>
   );

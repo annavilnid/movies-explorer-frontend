@@ -118,6 +118,18 @@
   color: #EE3465;
 }
 
+.profile__success-message {
+  width: 100%;
+  text-align: center;
+  color: #3DDC84;
+}
+
+.profile__error-message {
+  width: 100%;
+  text-align: center;
+  color: #EE3465;
+}
+
 @media screen and (min-width: 540px) {
   .profile__form {
     max-width: 53.25vw;

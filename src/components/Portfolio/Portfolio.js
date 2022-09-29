@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from 'uuid';
+
 function Portfolio () {
   const portfolioData = [
 		{
@@ -17,8 +19,8 @@ function Portfolio () {
 		},
 	];
 
-  const getLinkMarkup = portfolioData.map((i, index) => (
-    <li className="portfolio__item" key={index}>
+  const getLinkMarkup = portfolioData.map((i) => (
+    <li className="portfolio__item" key={uuidv4()}>
       <a href={i.link} target="_blank" rel="noreferrer" className="portfolio__link">{i.title}</a>
     </li>
 	));

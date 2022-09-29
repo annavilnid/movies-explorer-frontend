@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from 'uuid';
+
 function Footer() {
   const currentYear = new Date().getFullYear();
 	const footerTitle = 'Учебный проект Яндекс.Практикум х BeatFilm.';
@@ -15,8 +17,8 @@ function Footer() {
     }
   ]
 
-  const getFooterMarkup = footerData.map((i, index) => (
-    <li className="footer__item" key={index}>
+  const getFooterMarkup = footerData.map((i) => (
+    <li className="footer__item" key={uuidv4()}>
       <a href={i.link} target="_blank" rel="noreferrer" className="footer__link">{i.value}</a>
     </li>
 	));

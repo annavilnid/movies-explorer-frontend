@@ -2,7 +2,7 @@ import SearchToggle from '../SearchToggle/SearchToggle';
 import { useEffect } from 'react';
 import useFormWithValidation from '../../hooks/useFormWithValidation';
 
-function SearchForm({onSubmit, searchRequest, onChange, filterIsOn, setFilterIsOn, setSearchRequestSaved}) {
+function SearchForm({onSubmit, searchRequest, onChange, filterIsOn, setFilterIsOn, setSearchRequestSaved, isLoading, setIsLoading}) {
 
   const {
     values,
@@ -25,8 +25,11 @@ function SearchForm({onSubmit, searchRequest, onChange, filterIsOn, setFilterIsO
 	}, [searchRequest, setValues, setIsValid]);
 
   const submitHandler = (e) => {
+    setIsLoading(true)
     e.preventDefault();
-    onSubmit(values.search);
+    if (!isLoading) {
+      onSubmit(values.search);
+    }
   }
 
   const onChangeHandler = (event) => {
@@ -53,11 +56,12 @@ function SearchForm({onSubmit, searchRequest, onChange, filterIsOn, setFilterIsO
               value={values.search || ''}
               placeholder="Фильм"
               onChange={onChangeHandler}
+              disabled={isLoading}
             />
             <input type="submit"
             className="search__form-button"
             value='Поиск'
-            disabled={!values.search || !isValid}
+            disabled={!values.search || !isValid || isLoading}
             />
           </div>
           <span className='search__error'>{getStatusMessage() || ''}</span>

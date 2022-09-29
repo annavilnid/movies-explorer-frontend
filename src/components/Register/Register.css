@@ -133,6 +133,14 @@
   justify-content: center;
 }
 
+.register__error-message {
+  margin-top: 20px;
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  color: #EE3465;
+}
+
 @media screen and (min-width: 540px) {
   .register {
     width: calc(100vw - 24.22vw);

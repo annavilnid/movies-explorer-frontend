@@ -11,3 +11,13 @@ export const DESKTOP_WIDTH = 1280;
 export const TABLET_WIDTH = 768;
 
 export const MOBILE_WIDTH = 480;
+
+export const COUNT_MOBILE = 5;
+
+export const COUNT_TABLET = 8;
+
+export const COUNT_DESKTOP = 12;
+
+export const EXTRA_MOBILE_TABLET = 2;
+
+export const EXTRA_DESKTOP = 3;

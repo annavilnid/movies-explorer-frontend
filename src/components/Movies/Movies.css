@@ -40,9 +40,18 @@
 
 }
 
-@media screen and (min-width: 409px) {
+@media screen and (min-width: 409px) and (max-width: 930px) {
+
   .movies__button {
     margin-top: 80px;
+    width: 320px;
+  }
+
+}
+
+@media screen and (min-width: 931px) {
+  .movies__button {
+    margin-top: 65px;
     width: 320px;
   }
 }

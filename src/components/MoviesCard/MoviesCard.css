@@ -1,5 +1,5 @@
 .movie-card {
-  margin: 0 auto 16px auto;
+  margin: 0 auto 14px auto;
   list-style-type: none;
   width: 93.5vw;
   min-height: 271px;
@@ -55,7 +55,7 @@
 }
 
 .movie-card__saved {
-  margin: 14px auto;
+  margin: 10px auto;
   padding: 0;
   background: #EE3465;
   border-radius: 30px;
@@ -70,7 +70,7 @@
 }
 
 .movie-card__button {
-  margin: 14px auto;
+  margin: 15px auto;
   padding: 0;
   background: #313131;
   border-radius: 30px;
@@ -97,6 +97,7 @@
   }
 
   .movie-card__length {
+    min-width: 10vw;
     font-size: 13px;
     line-height: 18px;
   }
@@ -122,11 +123,11 @@
   }
 
   .movie-card__button {
-    margin: 18px auto;
+    margin: 10px auto;
   }
 
   .movie-card__saved {
-    margin: 18px auto;
+    margin: 10px auto;
   }
 }
 
@@ -139,6 +140,7 @@
   }
 
   .movie-card__length {
+    min-width: 6vw;
     font-size: 13px;
     line-height: 18px;
   }
@@ -160,14 +162,15 @@
 
   .movie-card__image {
     width: 28vw;
-    height: 25vw;
+    height: 15.5vw;
   }
 
   .movie-card__button {
-    margin: 18px auto;
+    margin: 15px auto;
   }
 
   .movie-card__saved {
-    margin: 18px auto;
+    margin: 15px auto;
   }
 }
+

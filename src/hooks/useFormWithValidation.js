@@ -12,7 +12,7 @@ function useFormWithValidation() {
     const { value } = target;
     setValues({ ...values, [name]: value });
     setErrors({ ...errors, [name]: target.validationMessage });
-    setIsValid(target.closest('form').checkValidity());
+      setIsValid(target.closest('form').checkValidity());
   };
 
   const resetForm = useCallback(
@@ -23,7 +23,6 @@ function useFormWithValidation() {
     },
     [setValues, setErrors, setIsValid],
   );
-
 
   const validateEmail = () => {
     if(("email" in values)&&(!validate(values.email))) {
