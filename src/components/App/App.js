@@ -56,7 +56,7 @@ function App() {
   }, [filterIsOnMain]);
 
   useEffect(() => {
-    if(errMessage) {
+    if (errMessage) {
       setIsInfoTooltip(true)
     }
   }, [errMessage]);
