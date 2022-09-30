@@ -2,8 +2,10 @@ import Logo from "../logo/logo";
 import Form from "../Form/Form"
 import { useEffect } from "react";
 import useFormWithValidation from '../../hooks/useFormWithValidation';
+import { Navigate } from 'react-router-dom';
 
-function Register({onSubmit, isLoading, setIsLoading}) {
+function Register({onSubmit, isLoading, setIsLoading, isLoggedIn}) {
+
   const {
     values,
     setValues,
@@ -28,6 +30,7 @@ function Register({onSubmit, isLoading, setIsLoading}) {
 
   return (
     <div className="register">
+      {isLoggedIn && <Navigate to="/" />}
       <Logo className='register__logo logo'/>
       <Form
       onSubmit={submitHandler}

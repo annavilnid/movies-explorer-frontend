@@ -80,7 +80,7 @@ function App() {
   const handleTokenCheck = () => {
 		const token = localStorage.getItem('jwt_movie');
 		if (token) {
-			auth.checkToken(token)
+		  auth.checkToken(token)
 				.then((res) => {
 					setIsLoggedIn(true);
 					setCurrentUser(res.user);
@@ -134,7 +134,6 @@ function App() {
 	};
 
   const handleRegistration = (name, email, password) => {
-    console.log(name, email, password)
 		auth.register(name, email, password)
 			.then((res) => {
         console.log('Пытаемся зарегестрироваться')
@@ -254,7 +253,9 @@ function App() {
 
   function closeInfoTooltip() {
     setIsInfoTooltip(false)
-    setErrMessage('')
+    setTimeout(() => {
+      setErrMessage('');
+    }, "1500")
   }
 
   return (
@@ -326,8 +327,8 @@ function App() {
         }
         />
 
-        { !isLoggedIn && <Route exact path={'/signup'} element={<Register onSubmit={handleRegistration} isLoading={isLoading} setIsLoading={setIsLoading}/>}/> }
-        { !isLoggedIn && <Route exact path={'/signin'} element={<Login onSubmit={handleLogin} isLoading={isLoading} setIsLoading={setIsLoading}/>}/> }
+        <Route exact path={'/signup'} element={<Register onSubmit={handleRegistration} isLoading={isLoading} setIsLoading={setIsLoading} isLoggedIn={isLoggedIn}/>}/>
+        <Route exact path={'/signin'} element={<Login onSubmit={handleLogin} isLoading={isLoading} setIsLoading={setIsLoading} isLoggedIn={isLoggedIn}/>}/>
         <Route path={'*'} element={<NotFoundPage/>}/>
       </Routes>
       <InfoTooltip

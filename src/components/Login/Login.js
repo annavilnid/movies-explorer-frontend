@@ -2,8 +2,9 @@ import { useEffect } from "react";
 import Logo from "../logo/logo";
 import Form from '../Form/Form';
 import useFormWithValidation from '../../hooks/useFormWithValidation';
+import { Navigate } from 'react-router-dom';
 
-function Login({onSubmit, isLoading, setIsLoading}) {
+function Login({onSubmit, isLoading, setIsLoading, isLoggedIn}) {
   const {
     values,
     setValues,
@@ -28,6 +29,7 @@ function Login({onSubmit, isLoading, setIsLoading}) {
 
   return (
     <div className="login">
+      {isLoggedIn && <Navigate to="/" />}
       <Logo className={'login__logo logo'}/>
       <Form
       onSubmit={submitHandler}

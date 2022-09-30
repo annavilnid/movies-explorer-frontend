@@ -50,7 +50,7 @@ function Movies({onSubmit, moviesData, searchRequest, addDeleteHandler, isMovieA
 			clearTimeout(timeOut);
 			timeOut = setTimeout(() => {
 				setScreenSize(getScreenWidth());
-			}, 1);
+			}, 150);
 		};
 		window.addEventListener('resize', resizeHandler);
 
