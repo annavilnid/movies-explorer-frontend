@@ -49,7 +49,7 @@ function App() {
 
   useEffect(() => {
    handleTokenCheck()
-  }, [])
+  }, []);
 
   useEffect(() => {
     localStorage.setItem('showShortMovies', JSON.stringify(filterIsOnMain));
@@ -151,14 +151,13 @@ function App() {
 	};
 
   const handleLogOut = () => {
-    localStorage.clear();
     setIsLoggedIn(false);
     setIsLoading(false);
     setSuccessMessage('')
 		setCurrentUser({});
     setSearchRequestSaved('')
-    setMainMoviesArray([])
     setSavedMoviesArray([])
+    setMainMoviesArray([])
     setFilteredSavedMoviesArray([])
     setSearchRequestMain('')
     setSearchRequestSaved('')
@@ -166,6 +165,7 @@ function App() {
     setNotFoundSaved('')
     setFilterIsOnMain(false)
     setFilterIsOnSaved(false)
+    localStorage.clear();
     navigate('/')
   }
 
