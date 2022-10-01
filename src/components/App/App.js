@@ -27,18 +27,18 @@ function App() {
 
   const [currentUser, setCurrentUser] = useState({});
 
-  const [mainMoviesArray, setMainMoviesArray] = useState(JSON.parse(localStorage.getItem('foundedMovies')) ? JSON.parse(localStorage.getItem('foundedMovies')) : []);
+  const [mainMoviesArray, setMainMoviesArray] = useState([]);
   const [savedMoviesArray, setSavedMoviesArray] = useState([]);
 
   const [filteredSavedMoviesArray, setFilteredSavedMoviesArray] = useState([]);
 
-  const [searchRequestMain, setSearchRequestMain] = useState(JSON.parse(localStorage.getItem('searchRequest')) ? JSON.parse(localStorage.getItem('searchRequest')) : '');
+  const [searchRequestMain, setSearchRequestMain] = useState('');
   const [searchRequestSaved, setSearchRequestSaved] = useState('');
 
   const [notFoundMain, setNotFoundMain] = useState('')
   const [notFoundSaved, setNotFoundSaved] = useState('')
 
-  const [filterIsOnMain, setFilterIsOnMain] = useState(JSON.parse(localStorage.getItem('showShortMovies')) || false);
+  const [filterIsOnMain, setFilterIsOnMain] = useState(false);
   const [filterIsOnSaved, setFilterIsOnSaved] = useState(false);
 
   const [errMessage, setErrMessage]=useState('');
@@ -52,7 +52,9 @@ function App() {
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('showShortMovies', JSON.stringify(filterIsOnMain));
+    if(isLoggedIn) {
+      localStorage.setItem('showShortMovies', JSON.stringify(filterIsOnMain));
+    }
   }, [filterIsOnMain]);
 
   useEffect(() => {
@@ -82,6 +84,9 @@ function App() {
 		if (token) {
 		  auth.checkToken(token)
 				.then((res) => {
+          setMainMoviesArray(JSON.parse(localStorage.getItem('foundedMovies')));
+          setSearchRequestMain(JSON.parse(localStorage.getItem('searchRequest')));
+          setFilterIsOnMain(JSON.parse(localStorage.getItem('showShortMovies')));
 					setIsLoggedIn(true);
 					setCurrentUser(res.user);
           navigate(location.pathname)
@@ -136,7 +141,6 @@ function App() {
   const handleRegistration = (name, email, password) => {
 		auth.register(name, email, password)
 			.then((res) => {
-        console.log('Пытаемся зарегестрироваться')
 				handleLogin(email, password);
 			})
 			.catch((err) => {
