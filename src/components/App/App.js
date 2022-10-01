@@ -32,7 +32,7 @@ function App() {
 
   const [filteredSavedMoviesArray, setFilteredSavedMoviesArray] = useState([]);
 
-  const [searchRequestMain, setSearchRequestMain] = useState(JSON.parse(localStorage.getItem('searchRequest')) || '');
+  const [searchRequestMain, setSearchRequestMain] = useState(JSON.parse(localStorage.getItem('searchRequest')) ? JSON.parse(localStorage.getItem('searchRequest')) : '');
   const [searchRequestSaved, setSearchRequestSaved] = useState('');
 
   const [notFoundMain, setNotFoundMain] = useState('')
@@ -52,7 +52,7 @@ function App() {
   }, [])
 
   useEffect(() => {
-    localStorage.setItem('showShortMovies', filterIsOnMain);
+    localStorage.setItem('showShortMovies', JSON.stringify(filterIsOnMain));
   }, [filterIsOnMain]);
 
   useEffect(() => {
