@@ -80,6 +80,10 @@
   opacity: 0.6;
 }
 
+.register__button:disabled {
+  opacity: 0.2;
+}
+
 .register__link {
   margin: 0;
   padding: 0;
@@ -127,6 +131,14 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
+}
+
+.register__error-message {
+  margin-top: 20px;
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  color: #EE3465;
 }
 
 @media screen and (min-width: 540px) {

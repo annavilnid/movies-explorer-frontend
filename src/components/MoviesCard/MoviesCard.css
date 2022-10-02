@@ -1,5 +1,5 @@
 .movie-card {
-  margin: 0 auto 16px auto;
+  margin: 0 auto 14px auto;
   list-style-type: none;
   width: 93.5vw;
   min-height: 271px;
@@ -25,11 +25,17 @@
   font-weight: 500;
   font-size: 12px;
   line-height: 18px;
+  white-space: nowrap;
+  overflow: hidden;
+  padding-right: 5px;
+  text-overflow: ellipsis
 }
 
 .movie-card__length {
   margin: 0;
   padding: 0;
+  min-width: 19vw;
+  text-align: end;
   font-style: normal;
   font-weight: 400;
   font-size: 10px;
@@ -38,12 +44,18 @@
 }
 
 .movie-card__image {
-  max-width: 93.7vw;
-  max-height: 52.5vw;
+  width: 93.7vw;
+  height: 52.5vw;
+  object-fit: cover;
+}
+
+.movie-card__link {
+  margin: 0;
+  padding: 0;
 }
 
 .movie-card__saved {
-  margin: 14px auto;
+  margin: 10px auto;
   padding: 0;
   background: #EE3465;
   border-radius: 30px;
@@ -58,7 +70,7 @@
 }
 
 .movie-card__button {
-  margin: 14px auto;
+  margin: 15px auto;
   padding: 0;
   background: #313131;
   border-radius: 30px;
@@ -85,6 +97,7 @@
   }
 
   .movie-card__length {
+    min-width: 10vw;
     font-size: 13px;
     line-height: 18px;
   }
@@ -105,16 +118,16 @@
   }
 
   .movie-card__image {
-    max-width: 44.7vw;
-    max-height: 24.74vw;
+    width: 44.7vw;
+    height: 24.74vw;
   }
 
   .movie-card__button {
-    margin: 18px auto;
+    margin: 10px auto;
   }
 
   .movie-card__saved {
-    margin: 18px auto;
+    margin: 10px auto;
   }
 }
 
@@ -127,6 +140,7 @@
   }
 
   .movie-card__length {
+    min-width: 6vw;
     font-size: 13px;
     line-height: 18px;
   }
@@ -147,15 +161,16 @@
   }
 
   .movie-card__image {
-    max-width: 28vw;
-    max-height: 25vw;
+    width: 28vw;
+    height: 15.5vw;
   }
 
   .movie-card__button {
-    margin: 18px auto;
+    margin: 15px auto;
   }
 
   .movie-card__saved {
-    margin: 18px auto;
+    margin: 15px auto;
   }
 }
+

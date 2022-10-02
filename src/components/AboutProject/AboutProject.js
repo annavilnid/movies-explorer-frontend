@@ -1,4 +1,5 @@
 import Title from "../Title/Title";
+import { v4 as uuidv4 } from 'uuid';
 
 function AboutProject({id}) {
   const aboutProjectTitle = 'О проекте';
@@ -14,8 +15,8 @@ function AboutProject({id}) {
 			about: 'У каждого этапа был мягкий и жёсткий дедлайн, которые нужно было соблюдать, чтобы успешно защититься.',
 		},
 	];
-	const getArticlesContent = aboutProjectData.map((i, index) => (
-		<div className="about-project__article article" key={index}>
+	const getArticlesContent = aboutProjectData.map((i) => (
+		<div className="about-project__article article" key={uuidv4()}>
 			<h3 className="article__title">{i.title}</h3>
 		  <p className="article__text">{i.about}</p>
 		</div>

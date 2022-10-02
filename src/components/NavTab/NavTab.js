@@ -1,4 +1,5 @@
 import { Link } from 'react-scroll'
+import { v4 as uuidv4 } from 'uuid';
 
 function NavTab() {
   const navTabData=[
@@ -16,8 +17,8 @@ function NavTab() {
     }
   ]
 
-  const linkMarkup = navTabData.map((i, index) => (
-  <li className="navtab__item" key={index}>
+  const linkMarkup = navTabData.map((i) => (
+  <li className="navtab__item" key={uuidv4()}>
     <Link
     activeClass="active"
     to={i.value}

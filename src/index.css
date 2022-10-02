@@ -46,3 +46,5 @@
 @import "./components/Button/Button.css";
 
 @import "./components/NotFoundPage/NotFoundPage.css";
+
+@import "./components/InfoTooltip/InfoTooltip.css";
